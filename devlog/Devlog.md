@@ -21,3 +21,8 @@ This document contains a record of the progress I made on the assessment. It det
 **Task Type:** Bug fix\
 **Task Completed:** Fixed duplicated id in Quest type.\
 **Description:** When I started testing _GET_ quests by hero id route on _Postman_, it wouldn't return quests even though a quest was added with specified hero Id. The issue was Quest class did not have heroId variable. Therefore heroId data was lost at creation of a quest. I fixed the issue by adding heroId variable to [Quest.js](../backend/src/types/Quest.js) to store the hero id value.
+
+**Date: Fri Dec 23 - 15:07:30 EST**\
+**Task Type:** Bug fix\
+**Task Completed:** Fixed getQuestsByHeroId function.\
+**Description:** getQuestsByHeroId function in [QuestDB](../backend/src/database/HeroesDB.js) would only get the first quest that matched with the hero id. But, I wanted to get all quests matching with heroId. I did some searches and came across [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) documentation, which returns an array of elements that match the specified condition.

@@ -45,7 +45,7 @@ export class QuestsDB {
      * @returns Array of quests with specified heroId
      */
     getQuestsByHeroId(heroId) {
-        return this.quests.find((quest) => quest.heroId === heroId);
+        return this.quests.filter((quest) => quest.heroId === heroId);
     }
 
     /**
