@@ -11,3 +11,8 @@ This document contains a record of the progress I made on the assessment. It det
 **Task Type:** Progress Report\
 **Task Completed:** Implemented Quest type.\
 **Description:** I created [Quest](../backend/src/types/Quest.js) class in types to define a Quest object attributes and behaviors. I used [Hero](../backend/src/types/Hero.js) class as an example.
+
+**Date: Fri Dec 23, 2022 - 10:37:28 EST**\
+**Task Type:** Progress Report\
+**Task Completed:** Implemented Quest database.\
+**Description:** I implemented [QuestsDB](../backend/src/database/QuestsDB.js) in databases folder to define a Quest database functionalities. I added necessary functions to do CRUD operations. I used [HeroesDB](../backend/src/database/HeroesDB.js) class as an example.
