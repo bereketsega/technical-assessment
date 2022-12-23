@@ -16,3 +16,8 @@ This document contains a record of the progress I made on the assessment. It det
 **Task Type:** Progress Report\
 **Task Completed:** Implemented Quest database.\
 **Description:** I implemented [QuestsDB](../backend/src/database/QuestsDB.js) in databases folder to define a Quest database functionalities. I added necessary functions to do CRUD operations. I used [HeroesDB](../backend/src/database/HeroesDB.js) class as an example.
+
+**Date: Fri Dec 23, 2022 - 13:37:28 EST**\
+**Task Type:** Bug fix\
+**Task Completed:** Fixed duplicated id in Quest type.\
+**Description:** When I started testing _GET_ quests by hero id route on _Postman_, it wouldn't return quests even though a quest was added with specified hero Id. The issue was Quest class did not have heroId variable. Therefore heroId data was lost at creation of a quest. I fixed the issue by adding heroId variable to [Quest.js](../backend/src/types/Quest.js) to store the hero id value.

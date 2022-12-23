@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid';
 
 /**
  * Defines Quest type
@@ -11,9 +11,9 @@ export class Quest {
      */
     constructor(args) {
         this.id = uuid();
-        this.name = args.name || "Default Quest Name";
-        this.description = args.description || "Default Quest Description";
-        this.id = args.id;
+        this.name = args.name || 'Default Quest Name';
+        this.description = args.description || 'Default Quest Description';
+        this.heroId = args.heroId;
     }
 
     /**
