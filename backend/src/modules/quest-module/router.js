@@ -67,7 +67,26 @@ export function questsRouter() {
         }
     });
 
-    // TODO: Task 4
+    /**
+     * Deletes a Quest with heroId and QuestId in Quests database
+     *
+     */
+    router.delete('/heroes/:heroId/quests/:questId', (req, res) => {
+        const heroId = req.params.heroId;
+        const hero = HeroesDB.getInstance().getHero(heroId);
+
+        const questId = req.params.questId;
+        const quest = QuestsDB.getInstance().getQuest(questId);
+
+        if (!(hero && quest)) {
+            res.status(404).send('Hero or Quest was not found for given IDs');
+        } else if (quest.heroId !== heroId) {
+            res.status(400).send("Route heroId does not match the Quest's heroId in database");
+        } else {
+            QuestsDB.getInstance().deleteQuest(questId);
+            res.sendStatus(204);
+        }
+    });
 
     return router;
 }
