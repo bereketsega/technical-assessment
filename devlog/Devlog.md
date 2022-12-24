@@ -98,3 +98,32 @@ router.patch('/heroes/:heroId/quests/:questId', (req, res) => {
     }
 });
 ```
+
+&nbsp;
+
+**Date: Sat Dec 24, 2022 - 11:50:11 EST**\
+**Task Type:** [Backend Task 4](https://github.com/Cyber4All/technical-assessment/tree/main/backend#task-4---deleting-a-quest)\
+**Task Completed:** Implemented Delete a Quest route.\
+**Description:** Implemented a _DELETE_ request which deletes a quest with specified heroID and questId. I used delete hero route in [hero-module](../backend/src/modules/hero-module/router.js) to guide me. I tested the three possible status outcomes, _400_, _404_ and _200_, with _POSTMAN_ and the responses match with my expectation.\
+**Code:**
+
+```javascript
+router.delete('/heroes/:heroId/quests/:questId', (req, res) => {
+    const heroId = req.params.heroId;
+    const hero = HeroesDB.getInstance().getHero(heroId);
+
+    const questId = req.params.questId;
+    const quest = QuestsDB.getInstance().getQuest(questId);
+
+    if (!(hero && quest)) {
+        res.status(404).send('Hero or Quest was not found for given IDs');
+    } else if (quest.heroId !== heroId) {
+        res.status(400).send("Route heroId does not match the Quest's heroId in database");
+    } else {
+        QuestsDB.getInstance().deleteQuest(questId);
+        res.sendStatus(204);
+    }
+});
+```
+
+**Plan:** My next plan is to implement unit test with [jest](https://jestjs.io/). Prior to this, I was not familiar with jest, so I will take some time to research, understand the [hero-module](./../backend/src/modules/hero-module/Heroes.spec.js) test code, and read the documentations.
