@@ -127,3 +127,16 @@ router.delete('/heroes/:heroId/quests/:questId', (req, res) => {
 ```
 
 **Plan:** My next plan is to implement unit test with [jest](https://jestjs.io/). Prior to this, I was not familiar with jest, so I will take some time to research, understand the [hero-module](./../backend/src/modules/hero-module/Heroes.spec.js) test code, and read the documentations.
+
+&nbsp;
+
+**Date: Sat Dec 24, 2022 - 16:05:26 EST**\
+**Task Type:** Testing\
+**Task Completed:** Implemented unit tests for quest module.\
+**Description:** After reading the fundamentals of [jest](https://jestjs.io/docs/getting-started), I started to understand the test scripts in [Heroes.spec.js](../backend/src/modules/hero-module/Heroes.spec.js). Then I learned how to apply the [expect()](https://jestjs.io/docs/expect) access matcher. Combining the documentation and the test scripts available for heroes test suites, I implemented test scripts for quests in [Quests.spec.js](../backend/src/modules/quest-module/Quests.spec.js). Then, I imported questsRouter into [SupertestSetup.js](../backend/src/test/SupertestSetup.js) and used it with express app. Finally, tested the test suites with the following command:
+
+```
+npm test
+```
+
+In total, all 20 tests have passed from 2 test suites, which are tests for quests and heroes.
