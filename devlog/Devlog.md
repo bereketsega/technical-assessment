@@ -25,7 +25,7 @@ This document contains a record of the progress I made on the assessment. It det
 **Date: Fri Dec 23, 2022 - 15:07:30 EST**\
 **Task Type:** Bug fix\
 **Task Completed:** Fixed getQuestsByHeroId function.\
-**Description:** getQuestsByHeroId function in [QuestDB](../backend/src/database/HeroesDB.js) would only get the first quest that matched with the hero id. But, I wanted to get all quests matching with heroId. I did some searches and came across [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) documentation, which returns an array of elements that match the specified condition.
+**Description:** getQuestsByHeroId function in [QuestDB](../backend/src/database/QuestsDB.js) would only get the first quest that matched with the hero id. But, I wanted to get all quests matching with heroId. I did some searches and came across [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) documentation, which returns an array of elements that match the specified condition.
 
 **Date: Fri Dec 23, 2022 - 16:06:50 EST**\
 **Task Type:** [Backend Task 1](https://github.com/Cyber4All/technical-assessment/blob/main/backend/README.md#task-1---getting-quests-for-a-hero)\
@@ -66,6 +66,35 @@ router.post('/heroes/:id/quests', (req, res) => {
         const quest = new Quest(body);
         QuestsDB.getInstance().createQuest(quest);
         res.status(201).send('Quest was added to the database');
+    }
+});
+```
+
+&nbsp;
+
+**Date: Sat Dec 24, 2022 - 06:30:08 EST**\
+**Task Type:** [Backend Task 3](https://github.com/Cyber4All/technical-assessment/tree/main/backend#task-3---updating-a-quest)\
+**Task Completed:** Implemented Update a Quest route.\
+**Description:** Implemented a _PATCH_ request which updates the description of a quest with specified heroID and questId. I used update heroes route in [hero-module](../backend/src/modules/hero-module/router.js) to guide me. I tested the three possible status outcomes, _400_, _404_ and _200_, with _POSTMAN_ and the responses match with my expectation.\
+**Code:**
+
+```javascript
+router.patch('/heroes/:heroId/quests/:questId', (req, res) => {
+    const heroId = req.params.heroId;
+    const hero = HeroesDB.getInstance().getHero(heroId);
+
+    const questId = req.params.questId;
+    const quest = QuestsDB.getInstance().getQuest(questId);
+
+    const body = req.body;
+
+    if (!(hero && quest)) {
+        res.status(404).send('Hero or Quest was not found for given IDs');
+    } else if (quest.heroId !== heroId) {
+        res.status(400).send("Route heroId does not match the Quest's heroId in database");
+    } else {
+        QuestsDB.getInstance().updateQuest(questId, body);
+        res.sendStatus(204);
     }
 });
 ```

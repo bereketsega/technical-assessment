@@ -44,7 +44,28 @@ export function questsRouter() {
         }
     });
 
-    // TODO: Task 3
+    /**
+     * Updates a Quest with heroId and questId in Quests database
+     *
+     */
+    router.patch('/heroes/:heroId/quests/:questId', (req, res) => {
+        const heroId = req.params.heroId;
+        const hero = HeroesDB.getInstance().getHero(heroId);
+
+        const questId = req.params.questId;
+        const quest = QuestsDB.getInstance().getQuest(questId);
+
+        const body = req.body;
+
+        if (!(hero && quest)) {
+            res.status(404).send('Hero or Quest was not found for given IDs');
+        } else if (quest.heroId !== heroId) {
+            res.status(400).send("Route heroId does not match the Quest's heroId in database");
+        } else {
+            QuestsDB.getInstance().updateQuest(questId, body);
+            res.sendStatus(204);
+        }
+    });
 
     // TODO: Task 4
 
